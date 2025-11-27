@@ -46,18 +46,23 @@
         .metric-group .columns.row > [class^='col-'] > button.btn::after { content:""; position:absolute; left:50%; top:50%; width:0; height:0; border-radius:50%; transform:translate(-50%,-50%); background:rgba(193,27,5,.35); opacity:0; }
         .metric-group .columns.row > [class^='col-'] > button.btn:active::after { animation:ripple .5s ease-out; }
         /* Estados rojos controlados desde JS (btn-danger y btn-outline-danger) */
-        .metric-group .columns.row > [class^='col-'] > button.btn-danger { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); padding:.45rem 1.2rem; box-shadow:0 6px 14px rgba(193,27,5,.28), inset 0 -1px 0 rgba(255,255,255,.15); border:2px solid var(--primary-dark); text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; transition:transform .2s ease, box-shadow .2s ease, background-position .3s ease; }
-        .metric-group .columns.row > [class^='col-'] > button.btn-danger:hover { transform:translateY(-1px); box-shadow:0 10px 22px var(--shadow); background-position: 100% 0; }
+        .metric-group .columns.row > [class^='col-'] > button.btn-danger { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)) !important; background-color: var(--primary) !important; padding:.45rem 1.2rem; box-shadow:0 6px 14px rgba(193,27,5,.28), inset 0 -1px 0 rgba(255,255,255,.15); border:2px solid var(--primary-dark) !important; text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; transition:transform .2s ease, box-shadow .2s ease, background-position .3s ease; }
+        .metric-group .columns.row > [class^='col-'] > button.btn-danger:hover,
+        .metric-group .columns.row > [class^='col-'] > button.btn-danger:focus { transform:translateY(-1px); box-shadow:0 10px 22px var(--shadow); background-position: 100% 0; }
         .metric-group .columns.row > [class^='col-'] > button.btn-outline-danger { color:var(--primary); border:2px solid var(--primary); padding:.32rem 1rem; border-radius:999px; background:#fff; transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease; }
-        .metric-group .columns.row > [class^='col-'] > button.btn-outline-danger:hover { color:#fff; background:linear-gradient(180deg, var(--primary-light), var(--primary)); box-shadow:0 10px 22px var(--shadow); }
-        .metric-group .columns.row > [class^='col-'] > button.btn:hover { transform:translateY(-2px); box-shadow:0 10px 22px var(--shadow); }
+        .metric-group .columns.row > [class^='col-'] > button.btn-outline-danger:hover,
+        .metric-group .columns.row > [class^='col-'] > button.btn-outline-danger:focus { color:#fff !important; background:linear-gradient(180deg, var(--primary-light), var(--primary)) !important; background-color: var(--primary) !important; box-shadow:0 10px 22px var(--shadow); border-color: var(--primary-dark) !important; }
+        .metric-group .columns.row > [class^='col-'] > button.btn:hover,
+        .metric-group .columns.row > [class^='col-'] > button.btn:focus { transform:translateY(-2px); box-shadow:0 10px 22px var(--shadow); background-color: transparent !important; border-color: inherit !important; color: inherit !important; }
         /* Reglas globales para asegurar rojo en cualquier botón primario */
-        .btn-primary { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); border:2px solid var(--primary-dark); text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; }
-        .btn.btn-primary { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); border:2px solid var(--primary-dark); text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; }
-        .btn-primary:hover, .btn.btn-primary:hover { filter:brightness(1.03); box-shadow:0 10px 22px var(--shadow); background-position:100% 0; }
+        .btn-primary { color:#fff !important; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)) !important; background-color: var(--primary) !important; border:2px solid var(--primary-dark) !important; text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; }
+        .btn.btn-primary { color:#fff !important; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)) !important; background-color: var(--primary) !important; border:2px solid var(--primary-dark) !important; text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; }
+        .btn-primary:hover, .btn.btn-primary:hover,
+        .btn-primary:focus, .btn.btn-primary:focus { filter:brightness(1.03); box-shadow:0 10px 22px var(--shadow); background-position:100% 0; border-color: var(--primary-dark) !important; color:#fff !important; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)) !important; background-color: var(--primary) !important; }
         .btn-primary:active, .btn.btn-primary:active { box-shadow:0 2px 6px var(--shadow); }
-        .btn-outline-danger { color:var(--primary); border:2px solid var(--primary); background:#fff; }
-        .btn-outline-danger:hover { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); }
+        .btn-outline-danger { color:var(--primary) !important; border:2px solid var(--primary) !important; background:#fff !important; }
+        .btn-outline-danger:hover { color:#fff !important; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)) !important; background-color: var(--primary) !important; }
+        .btn:focus, .btn:focus-visible { outline: none !important; }
         /* Quitar subrayados en etiquetas */
         .metric-group .columns .col-3.text-right.pr-2 abbr,
         .metric-group .columns .col-3.text-right.pr-2,
