@@ -32,8 +32,8 @@ const app = Vue.createApp({
          * @returns {string} - La cadena de clase CSS generada
          */
         buttonClass(isPrimary, big = false) {
-            const size = big ? 'btn-lg' : 'btn-sm';
-            const style = isPrimary ? 'btn-primary' : 'btn-outline-secondary';
+            const size = 'btn-lg';
+            const style = isPrimary ? 'btn-primary' : 'btn-outline-danger';
             return `btn ${style} ${size} me-2 mb-2`;
         },
         /**

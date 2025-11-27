@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.9/dist/spectre-icons.min.css">
     {{-- <link rel="stylesheet" href="styles.css"> --}}
     <style>
-        :root { --primary: #C11B05; }
-        .metric-type h4 { background:linear-gradient(180deg,#f1f3f5,#e9ecef); border:1px solid #ced4da; border-radius:.5rem; padding:.6rem 1rem; box-shadow:0 1px 2px rgba(0,0,0,.06); }
+        :root { --primary: #C11B05; --primary-dark:#9d1300; --primary-light:#e0341c; --shadow: rgba(193,27,5,.25); }
+        .metric-type h4 { background:linear-gradient(180deg,#f1f3f5,#e9ecef); border:1px solid #ced4da; border-radius:.5rem; padding:.6rem 1rem; box-shadow:0 1px 2px rgba(0,0,0,.06); opacity:0; transform:translateY(6px); animation:fadeInUp .35s ease forwards; transition:transform .2s ease, box-shadow .2s ease; }
+        .metric-type h4:hover { transform:translateY(-2px); box-shadow:0 8px 20px var(--shadow); }
         .metric-group { margin-top:1rem; }
-        .metric-group > div { background:#f8f9fa; border:1px solid #dee2e6; border-radius:.75rem; box-shadow:0 1px 3px rgba(0,0,0,.08) inset; padding:.75rem; }
+        .metric-group > div { background:#f8f9fa; border:1px solid #dee2e6; border-radius:.75rem; box-shadow:0 1px 3px rgba(0,0,0,.08) inset; padding:.75rem; opacity:0; transform:translateY(8px); animation:fadeInUp .45s ease forwards; transition:box-shadow .2s ease, border-color .2s ease; }
+        .metric-group > div:hover { box-shadow:0 8px 24px var(--shadow); border-color: var(--primary); }
         .btn { border-radius:999px; }
         .columns { display:flex; flex-wrap:wrap; }
         .columns .col-3 { flex:0 0 25%; max-width:25%; }
@@ -29,41 +31,68 @@
         .ps-2 { padding-left:.5rem !important; }
         /* Separadores de opciones */
         .metric-group .columns.row > [class^='col-'] { flex:0 0 auto; max-width:none; }
-        .metric-group .columns.row > [class^='col-']:not(:last-child)::after { content: " | "; margin: 0 .5rem; color:#adb5bd; }
+        .metric-group .columns.row > [class^='col-']:not(:last-child)::after { content: none; }
         /* Botones como texto, con pill al activo */
         .metric-group .columns.row > [class^='col-'] > button.btn {
-            border:0; background:transparent; padding:.22rem .55rem; margin:0; transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
-            border-radius:999px; position:relative; font-size:1rem;
+            border:0; background:transparent; padding:.32rem 1rem; margin:.25rem .5rem; transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+            border-radius:999px; position:relative; font-size:1.08rem; text-decoration:none; cursor:pointer;
         }
-        .metric-group .columns.row > [class^='col-'] > button.btn-primary {
-            color:#fff; background-image:linear-gradient(180deg, #e0341c, var(--primary));
-            padding:.35rem 1rem; box-shadow:0 6px 14px rgba(193,27,5,.28), inset 0 -1px 0 rgba(255,255,255,.15);
-            border:2px solid #9d1300; text-shadow:0 1px 0 rgba(0,0,0,.25);
-            text-decoration: underline dotted rgba(255,255,255,.9); text-underline-offset:.2rem; text-decoration-thickness:2px;
-        }
-        .metric-group .columns.row > [class^='col-'] > button.btn-primary:hover { filter:brightness(1.03); transform:translateY(-1px); }
-        .metric-group .columns.row > [class^='col-'] > button.btn-primary:active { transform:translateY(0); box-shadow:0 2px 6px rgba(193,27,5,.25); }
-        .metric-group .columns.row > [class^='col-'] > button.btn-outline-secondary { color:#6c757d; border:2px solid #cfd4da; padding:.32rem .9rem; border-radius:999px; }
-        .metric-group .columns.row > [class^='col-'] > button.btn-outline-secondary:hover {
-            color:#343a40; background-color:#eef2f4; border-radius:999px; transform:translateY(-1px);
-        }
-        .metric-group .columns.row > [class^='col-'] > button.btn:focus-visible { outline: none; box-shadow:0 0 0 3px rgba(193,27,5,.25); }
-        /* Subrayado punteado para etiquetas de la izquierda */
+        .metric-group .columns.row > [class^='col-'] > button.btn-primary { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); padding:.45rem 1.2rem; box-shadow:0 6px 14px rgba(193,27,5,.28), inset 0 -1px 0 rgba(255,255,255,.15); border:2px solid var(--primary-dark); text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; transition:transform .2s ease, box-shadow .2s ease, background-position .3s ease; }
+        .metric-group .columns.row > [class^='col-'] > button.btn-primary:hover { transform:translateY(-1px); box-shadow:0 10px 22px var(--shadow); background-position: 100% 0; }
+        .metric-group .columns.row > [class^='col-'] > button.btn-primary:active { transform:translateY(0); box-shadow:0 2px 6px var(--shadow); }
+        .metric-group .columns.row > [class^='col-'] > button.btn-outline-secondary { color:#6c757d; border:2px solid #cfd4da; padding:.32rem .9rem; border-radius:999px; transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease; }
+        .metric-group .columns.row > [class^='col-'] > button.btn-outline-secondary:hover { color:var(--primary); border-color: var(--primary); background-color:#fff; transform:translateY(-1px); box-shadow:0 10px 22px var(--shadow); }
+        .metric-group .columns.row > [class^='col-'] > button.btn:focus-visible { outline: none; box-shadow:0 0 0 3px var(--shadow); }
+        .metric-group .columns.row > [class^='col-'] > button.btn::after { content:""; position:absolute; left:50%; top:50%; width:0; height:0; border-radius:50%; transform:translate(-50%,-50%); background:rgba(193,27,5,.35); opacity:0; }
+        .metric-group .columns.row > [class^='col-'] > button.btn:active::after { animation:ripple .5s ease-out; }
+        /* Estados rojos controlados desde JS (btn-danger y btn-outline-danger) */
+        .metric-group .columns.row > [class^='col-'] > button.btn-danger { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); padding:.45rem 1.2rem; box-shadow:0 6px 14px rgba(193,27,5,.28), inset 0 -1px 0 rgba(255,255,255,.15); border:2px solid var(--primary-dark); text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; transition:transform .2s ease, box-shadow .2s ease, background-position .3s ease; }
+        .metric-group .columns.row > [class^='col-'] > button.btn-danger:hover { transform:translateY(-1px); box-shadow:0 10px 22px var(--shadow); background-position: 100% 0; }
+        .metric-group .columns.row > [class^='col-'] > button.btn-outline-danger { color:var(--primary); border:2px solid var(--primary); padding:.32rem 1rem; border-radius:999px; background:#fff; transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease; }
+        .metric-group .columns.row > [class^='col-'] > button.btn-outline-danger:hover { color:#fff; background:linear-gradient(180deg, var(--primary-light), var(--primary)); box-shadow:0 10px 22px var(--shadow); }
+        .metric-group .columns.row > [class^='col-'] > button.btn:hover { transform:translateY(-2px); box-shadow:0 10px 22px var(--shadow); }
+        /* Reglas globales para asegurar rojo en cualquier botón primario */
+        .btn-primary { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); border:2px solid var(--primary-dark); text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; }
+        .btn.btn-primary { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); border:2px solid var(--primary-dark); text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; }
+        .btn-primary:hover, .btn.btn-primary:hover { filter:brightness(1.03); box-shadow:0 10px 22px var(--shadow); background-position:100% 0; }
+        .btn-primary:active, .btn.btn-primary:active { box-shadow:0 2px 6px var(--shadow); }
+        .btn-outline-danger { color:var(--primary); border:2px solid var(--primary); background:#fff; }
+        .btn-outline-danger:hover { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); }
+        /* Quitar subrayados en etiquetas */
         .metric-group .columns .col-3.text-right.pr-2 abbr,
         .metric-group .columns .col-3.text-right.pr-2,
         .metric-group .columns .col-3.text-end.pe-2 abbr,
-        .metric-group .columns .col-3.text-end.pe-2 { text-decoration: underline dotted; text-underline-offset: .2rem; }
+        .metric-group .columns .col-3.text-end.pe-2 { text-decoration: none !important; }
         /* Centrado de página */
         #app { max-width: 1120px; margin: 0 auto; padding: .5rem; }
         body { background: radial-gradient(circle at 15% 10%, #ffffff, #f7f7f9); }
         /* Badges para severidad (cuando no hay Bootstrap) */
         .badge { display:inline-block; padding:.35rem .6rem; border-radius:.5rem; font-weight:600; }
-        .bg-success { background:#198754; color:#fff; }
+        .bg-success { background:var(--primary); color:#fff; }
+        .text-success { color: var(--primary) !important; }
+        .btn-success { background: var(--primary); border-color: var(--primary); color:#fff; }
         .bg-warning { background:#ffc107; color:#212529; }
         .bg-danger { background:var(--primary); color:#fff; }
         .bg-secondary { background:#6c757d; color:#fff; }
-        .score-pill { display:inline-flex; align-items:center; gap:.4rem; background:#f4f2ff; color:#222; padding:.25rem .6rem; border-radius:999px; box-shadow:inset 0 1px 0 rgba(255,255,255,.6); }
-        .score-dot { width:.5rem; height:.5rem; border-radius:50%; background:#5b61ff; display:inline-block; }
+        .score-pill { display:inline-flex; align-items:center; gap:.4rem; background:#f4f2ff; color:#222; padding:.25rem .6rem; border-radius:999px; box-shadow:inset 0 1px 0 rgba(255,255,255,.6); transition:transform .2s ease, box-shadow .2s ease; }
+        .score-pill:hover { transform:translateY(-1px); box-shadow:0 8px 20px var(--shadow); }
+        .score-dot { width:.5rem; height:.5rem; border-radius:50%; background:var(--primary); display:inline-block; animation:subtlePulse 1.8s ease-in-out infinite; }
+        mark { background: var(--primary); color:#fff; border-radius:.5rem; padding:.25rem .5rem; }
+        mark { transition:transform .2s ease, box-shadow .2s ease; }
+        mark:hover { transform:translateY(-1px); box-shadow:0 10px 22px var(--shadow); }
+
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(10px);} to { opacity:1; transform:translateY(0);} }
+        @keyframes ripple { 0%{width:0;height:0;opacity:.6} 100%{width:140%;height:140%;opacity:0} }
+        @keyframes subtlePulse { 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.15);} }
+
+        /* Remover cursor de ayuda y subrayados de abbr dentro de opciones */
+        .metric-group abbr[title] { text-decoration: none; border-bottom: 0; cursor: inherit; }
+        /* Remover subrayados de abbr en general */
+        abbr[title] { text-decoration: none; border-bottom: 0; }
+        /* Asegurar que el contenido dentro del botón no muestre subrayados ni cursor distinto */
+        .metric-group .columns.row button abbr,
+        .metric-group .columns.row button span { text-decoration: none; }
+        .metric-group .columns.row button * { cursor: inherit; }
     </style>
     @vite(['resources/js/cvss4/app.js', 'resources/css/styles.css'])
     <link rel="icon" href="data:,">
