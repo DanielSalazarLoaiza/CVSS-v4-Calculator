@@ -74,6 +74,8 @@
         /* Centrado de página */
         #app { max-width: 1120px; margin: 0 auto; padding: .5rem; }
         body { background: radial-gradient(circle at 15% 10%, #ffffff, #f7f7f9); }
+        #header { position: sticky; top: 0; z-index: 1000; background:#fff; box-shadow:0 2px 8px rgba(193,27,5,.12); border-bottom:1px solid #dee2e6; display:flex; align-items:center; gap:.75rem; padding:.5rem .75rem; }
+        #header .page-title { margin:0; }
         /* Badges para severidad (cuando no hay Bootstrap) */
         .badge { display:inline-block; padding:.35rem .6rem; border-radius:.5rem; font-weight:600; }
         .bg-success { background:var(--primary); color:#fff; }
@@ -148,7 +150,7 @@
         </header>
 
         <!-- Metrics Section -->
-        <main class="columns" :style="{'margin-top': header_height + 10 + 'px'}">
+        <main class="columns" style="margin-top: 10px;">
             <h6 id="cvssReference" style="width: 100%; max-width: 1065px; margin: 10px;">
                 Hover over metric names and metric values for a summary of the information in the official
                 <a href="https://www.first.org/cvss/v4.0/specification-document" target="_blank">
