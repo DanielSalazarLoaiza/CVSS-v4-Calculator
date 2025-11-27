@@ -34,9 +34,10 @@
         .metric-group .columns.row > [class^='col-']:not(:last-child)::after { content: none; }
         /* Botones como texto, con pill al activo */
         .metric-group .columns.row > [class^='col-'] > button.btn {
-            border:0; background:transparent; padding:.32rem 1rem; margin:.25rem .5rem; transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
-            border-radius:999px; position:relative; font-size:1.08rem; text-decoration:none; cursor:pointer;
+            border:0; background:transparent; padding:.28rem .85rem; margin:0; transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+            border-radius:999px; position:relative; font-size:.98rem; text-decoration:none; cursor:pointer;
         }
+        .metric-group .columns { gap: 10px; }
         .metric-group .columns.row > [class^='col-'] > button.btn-primary { color:#fff; background-image:linear-gradient(180deg, var(--primary-light), var(--primary)); padding:.45rem 1.2rem; box-shadow:0 6px 14px rgba(193,27,5,.28), inset 0 -1px 0 rgba(255,255,255,.15); border:2px solid var(--primary-dark); text-shadow:0 1px 0 rgba(0,0,0,.25); background-size:200% 200%; transition:transform .2s ease, box-shadow .2s ease, background-position .3s ease; }
         .metric-group .columns.row > [class^='col-'] > button.btn-primary:hover { transform:translateY(-1px); box-shadow:0 10px 22px var(--shadow); background-position: 100% 0; }
         .metric-group .columns.row > [class^='col-'] > button.btn-primary:active { transform:translateY(0); box-shadow:0 2px 6px var(--shadow); }
@@ -67,7 +68,9 @@
         .metric-group .columns .col-3.text-right.pr-2 abbr,
         .metric-group .columns .col-3.text-right.pr-2,
         .metric-group .columns .col-3.text-end.pe-2 abbr,
-        .metric-group .columns .col-3.text-end.pe-2 { text-decoration: none !important; }
+        .metric-group .columns .col-3.text-end.pe-2 { text-decoration: none !important; text-align:left !important; color:#6c757d; }
+        /* Alinear etiquetas de métricas a la izquierda en otros breakpoints */
+        .metric-group .mb-1 { text-align:left !important; color:#6c757d; }
         /* Centrado de página */
         #app { max-width: 1120px; margin: 0 auto; padding: .5rem; }
         body { background: radial-gradient(circle at 15% 10%, #ffffff, #f7f7f9); }
