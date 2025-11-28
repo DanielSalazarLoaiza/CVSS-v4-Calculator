@@ -74,8 +74,13 @@
         /* Centrado de página */
         #app { max-width: 1120px; margin: 0 auto; padding: .5rem; }
         body { background: radial-gradient(circle at 15% 10%, #ffffff, #f7f7f9); }
-        #header { position: sticky; top: 0; z-index: 1000; background:#fff; box-shadow:0 2px 8px rgba(193,27,5,.12); border-bottom:1px solid #dee2e6; display:flex; align-items:center; gap:.75rem; padding:.5rem .75rem; }
-        #header .page-title { margin:0; }
+        #header { position: sticky; top: 0; z-index: 1000; background:#fff; box-shadow:0 2px 8px rgba(193,27,5,.12); border-bottom:1px solid #dee2e6; display:flex; align-items:center; gap:.5rem .75rem; row-gap:.5rem; padding:.5rem .75rem; flex-wrap: wrap; }
+        #header img { order: 1; }
+        #header .page-title { order: 1; margin:0; flex:1 1 480px; min-width:0; white-space:normal; overflow-wrap:anywhere; }
+        #header mark { order: 2; flex:1 1 320px; min-width:0; overflow-wrap:anywhere; }
+        #header .btn { order: 2; }
+        #header .score-line { order: 2; flex:1 1 320px; min-width:0; margin:0; overflow-wrap:anywhere; }
+        #header blockquote { order: 3; flex:1 1 100%; max-height:140px; overflow:auto; margin:.25rem 0 0; }
         /* Badges para severidad (cuando no hay Bootstrap) */
         .badge { display:inline-block; padding:.35rem .6rem; border-radius:.5rem; font-weight:600; }
         .bg-success { background:var(--primary); color:#fff; }
@@ -150,7 +155,7 @@
         </header>
 
         <!-- Metrics Section -->
-        <main class="columns" style="margin-top: 10px;">
+        <main class="columns" :style="{'margin-top': header_height + 10 + 'px'}">
             <h6 id="cvssReference" style="width: 100%; max-width: 1065px; margin: 10px;">
                 Hover over metric names and metric values for a summary of the information in the official
                 <a href="https://www.first.org/cvss/v4.0/specification-document" target="_blank">
